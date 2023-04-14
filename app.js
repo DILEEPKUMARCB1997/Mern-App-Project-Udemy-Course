@@ -32,7 +32,7 @@ app.use("/api/places", placesRoutes); //=> /api/places/...
 app.use("/api/users", usersRoutes); //=> /api/users/...
 
 app.use((req, res, next) => {
-  res.sendFile(path.resolve(__diename, "public", "index.html"));
+  res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
 
 app.use((req, res, next) => {
