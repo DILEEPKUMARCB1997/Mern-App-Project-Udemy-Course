@@ -93,7 +93,7 @@ const signup = async (req, res, next) => {
   });
   console.log(User);
   console.log(createdUser);
-  console.log(req.file.path);
+  // console.log(req.file.path);
   // DUMMY_USERS.push(createdUser);
   try {
     await createdUser.save();
