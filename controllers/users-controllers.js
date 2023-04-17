@@ -6,17 +6,7 @@ const { validationResult } = require("express-validator");
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
 
-// const DUMMY_USERS = [
-//   {
-//     id: "user1",
-//     name: "Dileep Kumar C B",
-//     email: "dileep@gmail.com",
-//     password: "dileep",
-//   },
-// ];
-
 const getUsers = async (req, res, next) => {
-  // res.status(200).json({ users: DUMMY_USERS });
   let users;
   try {
     users = await User.find({}, "-password");
@@ -35,17 +25,12 @@ const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors);
-    // res.status(422).json({ errors: errors.errors.msg });
+
     return next(
       new HttpError("Invalid user inputs, please check your data", 422)
     );
   }
   const { name, email, password } = req.body;
-
-  // const hasUser = DUMMY_USERS.find((user) => user.email === email);
-  // if (hasUser) {
-  //   throw new HttpError("Could not signup, Email already exists", 422);
-  // }
 
   let existingUser;
   try {
@@ -65,13 +50,6 @@ const signup = async (req, res, next) => {
     );
     return next(error);
   }
-
-  // const createdUser = {
-  //   id: uuid.v4(),
-  //   name, //name:name
-  //   email, //email:email
-  //   password, //password :password
-  // };
 
   let hashedPassword;
   try {
@@ -93,11 +71,9 @@ const signup = async (req, res, next) => {
   });
   console.log(User);
   console.log(createdUser);
-  // console.log(req.file.path);
-  // DUMMY_USERS.push(createdUser);
+
   try {
     await createdUser.save();
-    // await createdUser.save();
   } catch (err) {
     const error = new HttpError("Sign up failed, please try again later", 500);
     return next(error);
@@ -167,14 +143,6 @@ const login = async (req, res, next) => {
     );
     return next(error);
   }
-
-  // const identifiedUser = DUMMY_USERS.find((user) => user.email === email);
-  // if (!identifiedUser || identifiedUser.password !== password) {
-  //   throw new HttpError(
-  //     "Could not find the user, please enter the valid credentials",
-  //     401
-  //   );
-  // }
 
   let token;
   try {

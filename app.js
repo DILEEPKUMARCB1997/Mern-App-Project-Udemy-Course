@@ -12,7 +12,10 @@ const app = express();
 
 app.use(bodyparser.json()); //-->for POST request
 
-app.use("/uploads/images", express.static(path.join("uploads", "images")));
+app.use(
+  "/uploads/images",
+  express.static(path.join(__dirname, "uploads", "images"))
+);
 
 app.use(express.static(path.join("public")));
 
