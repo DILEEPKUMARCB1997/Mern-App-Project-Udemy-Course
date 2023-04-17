@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-app.use(bodyparser.json()); //-->for POST request
+app.use(bodyparser.text()); //-->for POST request
 app.use(bodyparser.urlencoded({ extended: false }));
 
 app.use("/uploads/images", express.static(path.join("uploads", "images")));
