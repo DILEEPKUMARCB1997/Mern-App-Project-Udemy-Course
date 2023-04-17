@@ -10,12 +10,14 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-app.use(bodyparser.text()); //-->for POST request
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json()); //-->for POST request
 
-app.use("/uploads/images", express.static(path.join("uploads", "images")));
+app.use(
+  "/uploads/images",
+  express.static(path.join(__dirname, "uploads", "images"))
+);
 
-app.use(express.static(path.join("public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
