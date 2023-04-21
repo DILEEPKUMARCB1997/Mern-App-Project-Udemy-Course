@@ -69,8 +69,8 @@ const signup = async (req, res, next) => {
     password: hashedPassword,
     places: [],
   });
-  console.log(User);
-  console.log(createdUser);
+
+  console.log(req.file);
 
   try {
     await createdUser.save();
